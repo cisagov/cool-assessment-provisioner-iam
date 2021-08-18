@@ -29,13 +29,13 @@ variable "assessment_provisioners_group_name" {
 
 variable "provision_assessment_policy_description" {
   type        = string
-  description = "The description to associate with the IAM policy in the Users account that allows the assessment provisioner group to assume the provisioner role in assessment accounts."
-  default     = "Allows the assessment provisioner group to assume the provisioner role in assessment accounts."
+  description = "The description to associate with the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."
+  default     = "Allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."
 }
 
 variable "provision_assessment_policy_name" {
   type        = string
-  description = "The name of the IAM policy in the Users account that allows the assessment provisioner group to assume the provisioner role in assessment accounts."
+  description = "The name of the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."
   default     = "AssumeProvisionAssessment"
 }
 
