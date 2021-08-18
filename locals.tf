@@ -29,11 +29,30 @@ locals {
 
   # Get IDs of all non-assessment accounts in the organization, i.e. those
   # that don't have account names like: "env[:digit:] (.*)"
-  # These non-assessment accounts will NOT be allowed to be provisioned by
-  # the users in this project.
-  non_assessment_account_ids = [
+  all_non_assessment_account_ids = [
     for account in data.aws_organizations_organization.cool.accounts :
     account.id
     if length(regexall("^env[[:digit:]]+ \\(.*\\)$", account.name)) == 0
   ]
+
+  # Create a list of all provision roles in non-assessment accounts.
+  all_non_assessment_provision_roles = formatlist("arn:aws:iam::%s:role/%s", local.all_non_assessment_account_ids, var.provision_assessment_role_name)
+
+  # Assumption of the following non-assessment account roles is required
+  # to successfully provision assessment environments.
+  # TODO: Determine if it is possible/worthwhile to replace any
+  # "provision account" roles below with something less powerful.  New roles
+  # would need to be created in appropriate repositories, then used in
+  # cisagov/cool-assessment-terraform and also included below.
+  # See https://github.com/cisagov/cool-assessment-terraform/issues/133.
+  required_non_assessment_roles = [
+    data.terraform_remote_state.dns_certboto.outputs.provisioncertificatereadroles_role.arn,
+    data.terraform_remote_state.images_parameterstore-production.outputs.provisionparameterstorereadroles_role.arn,
+    data.terraform_remote_state.images_parameterstore-staging.outputs.provisionparameterstorereadroles_role.arn,
+    data.terraform_remote_state.sharedservices-production.outputs.provisionaccount_role.arn,
+    data.terraform_remote_state.sharedservices-staging.outputs.provisionaccount_role.arn,
+    data.terraform_remote_state.terraform.outputs.access_terraform_backend_role.arn,
+  ]
+
+  prohibited_non_assessment_provision_roles = setsubtract(local.all_non_assessment_provision_roles, local.required_non_assessment_roles)
 }
