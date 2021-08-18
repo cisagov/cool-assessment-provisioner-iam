@@ -68,7 +68,13 @@ No modules.
 | [aws_caller_identity.users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.provision_assessment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_organizations_organization.cool](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_organization) | data source |
+| [terraform_remote_state.dns_certboto](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.images_parameterstore-production](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.images_parameterstore-staging](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.master](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.sharedservices-production](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.sharedservices-staging](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.terraform](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.users](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs ##
@@ -77,8 +83,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | assessment\_provisioners\_group\_name | The name of the IAM group whose members are allowed to provision assessment environments. | `string` | `"assessment_provisioners"` | no |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
-| provision\_assessment\_policy\_description | The description to associate with the IAM policy in the Users account that allows the assessment provisioner group to assume the provisioner role in assessment accounts. | `string` | `"Allows the assessment provisioner group to assume the provisioner role in assessment accounts."` | no |
-| provision\_assessment\_policy\_name | The name of the IAM policy in the Users account that allows the assessment provisioner group to assume the provisioner role in assessment accounts. | `string` | `"AssumeProvisionAssessment"` | no |
+| provision\_assessment\_policy\_description | The description to associate with the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments. | `string` | `"Allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."` | no |
+| provision\_assessment\_policy\_name | The name of the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments. | `string` | `"AssumeProvisionAssessment"` | no |
 | provision\_assessment\_role\_name | The name of the IAM role in assessment accounts that includes all permissions necessary to provision the assessment environment in that account.  If this role does not exist in an account, an assessment environment cannot be provisioned in that account. | `string` | `"ProvisionAccount"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 | users | A list containing the usernames of users that exist in the Users account who are allowed to provision assessment environments.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ]. | `list(string)` | n/a | yes |
