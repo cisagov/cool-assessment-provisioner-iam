@@ -35,15 +35,7 @@ data "aws_iam_policy_document" "provision_assessment" {
 
     effect = "Allow"
 
-    resources = [
-      data.terraform_remote_state.dns_certboto.outputs.provisioncertificatereadroles_role.arn,
-      data.terraform_remote_state.images_parameterstore-production.outputs.provisionparameterstorereadroles_role.arn,
-      data.terraform_remote_state.images_parameterstore-staging.outputs.provisionparameterstorereadroles_role.arn,
-      data.terraform_remote_state.master.outputs.organizationsreadonly_role.arn,
-      data.terraform_remote_state.sharedservices-production.outputs.provisionaccount_role.arn,
-      data.terraform_remote_state.sharedservices-staging.outputs.provisionaccount_role.arn,
-      data.terraform_remote_state.terraform.outputs.access_terraform_backend_role.arn,
-    ]
+    resources = local.required_non_assessment_roles
 
     sid = "AllowRequiredNonAssessmentAccountRoles"
   }
