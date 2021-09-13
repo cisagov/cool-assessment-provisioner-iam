@@ -40,7 +40,7 @@ users allowed to provision assessment environments in the COOL.
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.12.0 |
+| terraform | ~> 0.13.0 |
 | aws | ~> 3.38 |
 
 ## Providers ##
