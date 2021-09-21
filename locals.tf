@@ -53,6 +53,7 @@ locals {
     data.terraform_remote_state.sharedservices-production.outputs.provisionaccount_role.arn,
     data.terraform_remote_state.sharedservices-staging.outputs.provisionaccount_role.arn,
     data.terraform_remote_state.terraform.outputs.access_terraform_backend_role.arn,
+    data.terraform_remote_state.terraform.outputs.provisionaccount_role.arn,
   ]
 
   prohibited_non_assessment_provision_roles = setsubtract(local.all_non_assessment_provision_roles, local.required_non_assessment_roles)
