@@ -47,7 +47,9 @@ locals {
   # See https://github.com/cisagov/cool-assessment-terraform/issues/133.
   required_non_assessment_roles = [
     data.terraform_remote_state.dns_certboto.outputs.provisioncertificatereadroles_role.arn,
+    data.terraform_remote_state.images_parameterstore-production.outputs.parameterstorereadonly_role.arn,
     data.terraform_remote_state.images_parameterstore-production.outputs.provisionparameterstorereadroles_role.arn,
+    data.terraform_remote_state.images_parameterstore-staging.outputs.parameterstorereadonly_role.arn,
     data.terraform_remote_state.images_parameterstore-staging.outputs.provisionparameterstorereadroles_role.arn,
     data.terraform_remote_state.master.outputs.organizationsreadonly_role.arn,
     data.terraform_remote_state.sharedservices-production.outputs.provisionaccount_role.arn,
