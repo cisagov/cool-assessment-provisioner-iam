@@ -38,6 +38,9 @@ locals {
   # Create a list of all provision roles in non-assessment accounts.
   all_non_assessment_provision_roles = formatlist("arn:aws:iam::%s:role/%s", local.all_non_assessment_account_ids, var.provision_assessment_role_name)
 
+  # Create a list of all startstopssmsession roles in non-assessment accounts.
+  all_non_assessment_startstopssmsession_roles = formatlist("arn:aws:iam::%s:role/%s", local.all_non_assessment_account_ids, var.startstopssmsession_role_name)
+
   # Assumption of the following non-assessment account roles is required
   # to successfully provision assessment environments.
   # TODO: Determine if it is possible/worthwhile to replace any
@@ -58,5 +61,9 @@ locals {
     data.terraform_remote_state.terraform.outputs.provisionaccount_role.arn,
   ]
 
+  # Create set of prohibited non-assessment account provision roles.
   prohibited_non_assessment_provision_roles = setsubtract(local.all_non_assessment_provision_roles, local.required_non_assessment_roles)
+
+  # Create comprehensive set of prohibited non-assessment account roles.
+  prohibited_non_assessment_roles = setunion(local.prohibited_non_assessment_provision_roles, local.all_non_assessment_startstopssmsession_roles)
 }
