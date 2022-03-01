@@ -86,6 +86,7 @@ No modules.
 | provision\_assessment\_policy\_description | The description to associate with the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments. | `string` | `"Allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."` | no |
 | provision\_assessment\_policy\_name | The name of the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments. | `string` | `"AssumeProvisionAssessment"` | no |
 | provision\_assessment\_role\_name | The name of the IAM role in assessment accounts that includes all permissions necessary to provision the assessment environment in that account.  If this role does not exist in an account, an assessment environment cannot be provisioned in that account. | `string` | `"ProvisionAccount"` | no |
+| startstopssmsession\_role\_name | The name of the IAM role in assessment accounts that includes all permissions necessary to start and stop an SSM session in that account. | `string` | `"StartStopSSMSession"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 | users | A list containing the usernames of users that exist in the Users account who are allowed to provision assessment environments.  Example: [ "firstname1.lastname1", "firstname2.lastname2" ]. | `list(string)` | n/a | yes |
 

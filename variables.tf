@@ -45,6 +45,12 @@ variable "provision_assessment_role_name" {
   default     = "ProvisionAccount"
 }
 
+variable "startstopssmsession_role_name" {
+  type        = string
+  description = "The name of the IAM role in assessment accounts that includes all permissions necessary to start and stop an SSM session in that account."
+  default     = "StartStopSSMSession"
+}
+
 variable "tags" {
   type        = map(string)
   description = "Tags to apply to all AWS resources created."

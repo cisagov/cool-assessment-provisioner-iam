@@ -22,6 +22,7 @@ data "aws_iam_policy_document" "provision_assessment" {
 
     resources = [
       "arn:aws:iam::*:role/${var.provision_assessment_role_name}",
+      "arn:aws:iam::*:role/${var.startstopssmsession_role_name}",
     ]
 
     sid = "AllowAssessmentAccountRoles"
@@ -48,7 +49,7 @@ data "aws_iam_policy_document" "provision_assessment" {
 
     effect = "Deny"
 
-    resources = local.prohibited_non_assessment_provision_roles
+    resources = local.prohibited_non_assessment_roles
 
     sid = "DenyNonAssessmentAccountRoles"
   }
