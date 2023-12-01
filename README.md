@@ -36,20 +36,21 @@ users allowed to provision assessment environments in the COOL.
 1. Run the command `terraform init`.
 1. Run the command `terraform apply -var-file=<workspace_name>.tfvars`.
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
-| aws.organizationsreadonly | ~> 3.38 |
-| aws.users | ~> 3.38 |
+| aws | ~> 4.9 |
+| aws.organizationsreadonly | ~> 4.9 |
+| aws.users | ~> 4.9 |
 | terraform | n/a |
 
 ## Modules ##
@@ -96,6 +97,7 @@ No modules.
 |------|-------------|
 | assessment\_provisioners\_group | The IAM group whose members are allowed to provision assessment environments. |
 | assessment\_provisioners\_policy | The IAM policy in the Users account that allows the assessment provisioners group to assume the provisioning role in assessment accounts. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 
