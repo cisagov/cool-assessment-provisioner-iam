@@ -27,15 +27,45 @@ variable "assessment_provisioners_group_name" {
   type        = string
 }
 
-variable "provision_assessment_policy_description" {
-  default     = "Allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."
-  description = "The description to associate with the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."
+variable "assessment_provisioners_no_backend_group_name" {
+  default     = "assessment_provisioners_no_backend"
+  description = "The name of the IAM group whose members are allowed to provision assessment environments but do not have general access to the Terraform backend."
   type        = string
 }
 
-variable "provision_assessment_policy_name" {
+variable "provision_assessment_backend_policy_description" {
+  default     = "Allows assumption of all non-assessment roles needed in order to provision assessment environments."
+  description = "The description to associate with the IAM policy in the Users account that allows assumption of all non-assessment roles needed in order to provision assessment environments."
+  type        = string
+}
+
+variable "provision_assessment_backend_policy_name" {
+  default     = "AssumeProvisionAssessmentBackend"
+  description = "The name of the IAM policy in the Users account that allows assumption of all non-assessment roles needed in order to provision assessment environments."
+  type        = string
+}
+
+variable "provision_assessment_base_policy_description" {
+  default     = "Allows assumption of all assessment roles needed in order to provision assessment environments."
+  description = "The description to associate with the IAM policy in the Users account that allows assumption of all assessment roles needed in order to provision assessment environments."
+  type        = string
+}
+
+variable "provision_assessment_base_policy_name" {
   default     = "AssumeProvisionAssessment"
-  description = "The name of the IAM policy in the Users account that allows the assessment provisioner group to assume all roles needed in order to provision assessment environments."
+  description = "The name of the IAM policy in the Users account that allows the assessment provisioner group to assume all assessment roles needed in order to provision assessment environments."
+  type        = string
+}
+
+variable "provision_assessment_no_backend_policy_description" {
+  default     = "Allows assumption of all non-assessment roles needed in order to provision assessment environments, with the exception of backend access."
+  description = "The description to associate with the IAM policy in the Users account that allows assumption of all non-assessment roles needed in order to provision assessment environments, with the exception of Terraform backend access."
+  type        = string
+}
+
+variable "provision_assessment_no_backend_policy_name" {
+  default     = "AssumeProvisionAssessmentNoBackend"
+  description = "The name of the IAM policy in the Users account that allows assumption of all non-assessment roles needed in order to provision assessment environments, with the exception of Terraform backend access."
   type        = string
 }
 

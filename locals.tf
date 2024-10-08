@@ -48,7 +48,7 @@ locals {
   # would need to be created in appropriate repositories, then used in
   # cisagov/cool-assessment-terraform and also included below.
   # See https://github.com/cisagov/cool-assessment-terraform/issues/133.
-  required_non_assessment_roles = [
+  required_non_assessment_roles_no_backend = [
     data.terraform_remote_state.dns_certboto.outputs.provisioncertificatereadroles_role.arn,
     data.terraform_remote_state.images_parameterstore-production.outputs.parameterstorereadonly_role.arn,
     data.terraform_remote_state.images_parameterstore-production.outputs.provisionparameterstorereadroles_role.arn,
@@ -57,13 +57,17 @@ locals {
     data.terraform_remote_state.master.outputs.organizationsreadonly_role.arn,
     data.terraform_remote_state.sharedservices-production.outputs.provisionaccount_role.arn,
     data.terraform_remote_state.sharedservices-staging.outputs.provisionaccount_role.arn,
-    data.terraform_remote_state.terraform.outputs.access_terraform_backend_role.arn,
     data.terraform_remote_state.terraform.outputs.provisionaccount_role.arn,
   ]
+  required_non_assessment_roles_backend = concat(local.required_non_assessment_roles_no_backend, [
+    data.terraform_remote_state.terraform.outputs.access_terraform_backend_role.arn,
+  ])
 
   # Create set of prohibited non-assessment account provision roles.
-  prohibited_non_assessment_provision_roles = setsubtract(local.all_non_assessment_provision_roles, local.required_non_assessment_roles)
+  prohibited_non_assessment_provision_roles_no_backend = setsubtract(local.all_non_assessment_provision_roles, local.required_non_assessment_roles_no_backend)
+  prohibited_non_assessment_provision_roles_backend    = setsubtract(local.all_non_assessment_provision_roles, local.required_non_assessment_roles_backend)
 
   # Create comprehensive set of prohibited non-assessment account roles.
-  prohibited_non_assessment_roles = setunion(local.prohibited_non_assessment_provision_roles, local.all_non_assessment_startstopssmsession_roles)
+  prohibited_non_assessment_roles_no_backend = setunion(local.prohibited_non_assessment_provision_roles_no_backend, local.all_non_assessment_startstopssmsession_roles)
+  prohibited_non_assessment_roles_backend    = setunion(local.prohibited_non_assessment_provision_roles_backend, local.all_non_assessment_startstopssmsession_roles)
 }
