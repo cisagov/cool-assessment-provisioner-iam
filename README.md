@@ -102,7 +102,7 @@ No modules.
 | provision\_assessment\_role\_name | The name of the IAM role in assessment accounts that includes all permissions necessary to provision the assessment environment in that account.  If this role does not exist in an account, an assessment environment cannot be provisioned in that account. | `string` | `"ProvisionAccount"` | no |
 | startstopssmsession\_role\_name | The name of the IAM role in assessment accounts that includes all permissions necessary to start and stop an SSM session in that account. | `string` | `"StartStopSSMSession"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
-| users | A list of maps, each containing a "name" and a "backend\_access" key.  The "name" value contains the name of a user that exists in the Users account who is to be allowed to provision assessment environments.  The "backend\_access" value contains a boolean value indicating whether or not the user should have general Terraform backend access.  Example: [ { name: "firstname1.lastname1", backend\_access: true }, {name: "firstname2.lastname2", backend\_access: false } ]. | `list(object({name=string, backend_access=bool}))` | n/a | yes |
+| users | A map.  The keys are the names of users that exist in the Users account and are to be allowed to provision assessment environments.  The values are maps with a single key, "backend\_access", which is a boolean value indicating whether or not the user should have general Terraform backend access.  Example: {"firstname1.lastname1" = {backend\_access = true}}, {"firstname2.lastname2" = {backend\_access = false}}. | `map(object({ backend_access = bool }))` | n/a | yes |
 
 ## Outputs ##
 
