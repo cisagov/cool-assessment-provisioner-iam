@@ -4,6 +4,11 @@
 # You must provide a value for each of these parameters.
 # ------------------------------------------------------------------------------
 
+variable "terraform_state_bucket" {
+  description = "The name of the S3 bucket where Terraform state is stored."
+  type        = string
+}
+
 variable "users" {
   description = "A map.  The keys are the names of users that exist in the Users account and are to be allowed to provision assessment environments.  The values are maps with a single key, \"backend_access\", which is a boolean value indicating whether or not the user should have general Terraform backend access.  Example: {\"firstname1.lastname1\" = {backend_access = true}}, {\"firstname2.lastname2\" = {backend_access = false}}."
   nullable    = false
