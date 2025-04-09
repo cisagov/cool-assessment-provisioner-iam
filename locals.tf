@@ -28,11 +28,11 @@ locals {
   caller_user_name = split("/", data.aws_caller_identity.default.arn)[1]
 
   # Get IDs of all non-assessment accounts in the organization, i.e. those
-  # that don't have account names like: "env[:digit:] (.*)"
+  # that don't have account names like: "env[:digit:]+"
   all_non_assessment_account_ids = [
     for account in data.aws_organizations_organization.cool.accounts :
     account.id
-    if length(regexall("^env[[:digit:]]+ \\(.*\\)$", account.name)) == 0
+    if length(regexall("^env[[:digit:]]+", account.name)) == 0
   ]
 
   # Create a list of all provision roles in non-assessment accounts.
@@ -50,13 +50,10 @@ locals {
   # See https://github.com/cisagov/cool-assessment-terraform/issues/133.
   required_non_assessment_roles_no_backend = [
     data.terraform_remote_state.dns_certboto.outputs.provisioncertificatereadroles_role.arn,
-    data.terraform_remote_state.images_parameterstore-production.outputs.parameterstorereadonly_role.arn,
-    data.terraform_remote_state.images_parameterstore-production.outputs.provisionparameterstorereadroles_role.arn,
-    data.terraform_remote_state.images_parameterstore-staging.outputs.parameterstorereadonly_role.arn,
-    data.terraform_remote_state.images_parameterstore-staging.outputs.provisionparameterstorereadroles_role.arn,
+    data.terraform_remote_state.images_parameterstore.outputs.parameterstorereadonly_role.arn,
+    data.terraform_remote_state.images_parameterstore.outputs.provisionparameterstorereadroles_role.arn,
     data.terraform_remote_state.master.outputs.organizationsreadonly_role.arn,
-    data.terraform_remote_state.sharedservices-production.outputs.provisionaccount_role.arn,
-    data.terraform_remote_state.sharedservices-staging.outputs.provisionaccount_role.arn,
+    data.terraform_remote_state.sharedservices.outputs.provisionaccount_role.arn,
     data.terraform_remote_state.terraform.outputs.provisionaccount_role.arn,
     data.terraform_remote_state.users.outputs.provisionaccount_role.arn,
   ]
