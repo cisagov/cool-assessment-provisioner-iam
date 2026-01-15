@@ -1,6 +1,8 @@
 # cool-assessment-provisioner-iam #
 
 [![GitHub Build Status](https://github.com/cisagov/cool-assessment-provisioner-iam/workflows/build/badge.svg)](https://github.com/cisagov/cool-assessment-provisioner-iam/actions)
+[![License](https://img.shields.io/github/license/cisagov/cool-assessment-provisioner-iam)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/cool-assessment-provisioner-iam/workflows/CodeQL/badge.svg)](https://github.com/cisagov/cool-assessment-provisioner-iam/actions/workflows/codeql-analysis.yml)
 
 This is a Terraform deployment for creating IAM resources for those
 users allowed to provision assessment environments in the COOL.
