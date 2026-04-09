@@ -42,14 +42,14 @@ users allowed to provision assessment environments in the COOL.
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | aws | ~> 6.7 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | ~> 6.7 |
 | aws.organizationsreadonly | ~> 6.7 |
 | aws.users | ~> 6.7 |
@@ -62,7 +62,7 @@ No modules.
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_group.assessment_provisioners](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group.assessment_provisioners_no_backend](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group_policy_attachment.assessment_provisioners_backend](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
@@ -89,7 +89,7 @@ No modules.
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | assessment\_provisioners\_group\_name | The name of the IAM group whose members are allowed to provision assessment environments. | `string` | `"assessment_provisioners"` | no |
 | assessment\_provisioners\_no\_backend\_group\_name | The name of the IAM group whose members are allowed to provision assessment environments but do not have general access to the Terraform backend. | `string` | `"assessment_provisioners_no_backend"` | no |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
@@ -108,7 +108,7 @@ No modules.
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | assessment\_provisioners\_backend\_policy | The IAM policy in the Users account that allows assumption of all non-assessment roles needed in order to provision assessment environments. |
 | assessment\_provisioners\_base\_policy | The IAM policy in the Users account that allows assumption of all assessment roles needed in order to provision assessment environments. |
 | assessment\_provisioners\_group | The IAM group whose members are allowed to provision assessment environments. |
