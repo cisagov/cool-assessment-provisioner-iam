@@ -28,11 +28,11 @@ locals {
   caller_user_name = split("/", data.aws_caller_identity.default.arn)[1]
 
   # Get IDs of all non-assessment accounts in the organization, i.e. those
-  # that don't have account names like: "env[:digit:]+"
+  # that don't have account names matching: "^env[:digit:]+$"
   all_non_assessment_account_ids = [
     for account in data.aws_organizations_organization.cool.accounts :
     account.id
-    if length(regexall("^env[[:digit:]]+", account.name)) == 0
+    if length(regexall("^env[[:digit:]]+$", account.name)) == 0
   ]
 
   # Create a list of all provision roles in non-assessment accounts.
